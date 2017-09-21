@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    android:id="@+id/percentRelativeLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guest_bg_loading"
+    tools:context="com.example.f1285.hoteltest.LaunchPage">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_launchpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <!--android:layout_below="@+id/linearLayout_launchpager_1"-->
+        <!--android:layout_above="@+id/linearLayout_launchpager_2"-->
+    </android.support.v4.view.ViewPager>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_heightPercent="23%"
+        android:src="@drawable/guest_img_funservice"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_launchpager_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_marginTopPercent="23%"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText_authcode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/editText_authcode"
+            android:hint="Authcode"
+            android:textColorHint="@color/hint"
+            android:paddingLeft="10dp"/>
+
+        <ImageButton
+            android:id="@+id/button_scan"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/guest_ic_qrcode"
+            android:background="@color/button_qrcode"
+            android:scaleType="fitCenter"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </LinearLayout>
+
+    <!--Authcode error 時，才會顯示-->
+    <LinearLayout
+        android:id="@+id/linearLayout_launchpager_textView_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout_launchpager_1"
+        android:layout_alignParentStart="true"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/textview_error"
+            android:textSize="@dimen/textview_error"
+            android:text="AuthCode error! Please check and try again, or you can use QR code."/>
+    </LinearLayout>
+
+    <!--input Authcode 時，才會顯示-->
+    <LinearLayout
+        android:id="@+id/linearLayout_launchpager_button_submit"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:visibility="gone"
+        android:layout_alignParentStart="true">
+        <!--android:layout_above="@+id/viewpager_dot"-->
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/guest_btn_green_rate"
+            android:textAllCaps="false"
+            android:textColor="@color/button_login_register_submit"
+            android:textSize="@dimen/button_login_register_submit"
+            android:text="Submit"/>
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/viewpager_dot"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_above="@+id/linearLayout_launchpager_3"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp">
+    </android.support.design.widget.TabLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_launchpager_3"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/guest_btn_green_rate"
+            android:textAllCaps="false"
+            android:textColor="@color/button_login_register_submit"
+            android:textSize="@dimen/button_login_register_submit"
+            android:text="Log in"/>
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/guest_btn_green_rate"
+            android:textAllCaps="false"
+            android:textColor="@color/button_login_register_submit"
+            android:textSize="@dimen/button_login_register_submit"
+            android:text="Register"/>
+    </LinearLayout>
+
+</android.support.percent.PercentRelativeLayout>

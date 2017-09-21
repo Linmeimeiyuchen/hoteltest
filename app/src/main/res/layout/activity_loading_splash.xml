@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guest_bg_loading"
+    tools:context="com.example.f1285.hoteltest.LoadingSplash">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_marginTopPercent="21%"
+        app:layout_heightPercent="14%"
+        android:orientation="vertical">
+
+        <com.example.f1285.hoteltest.TextViewRobotoRegular
+            android:id="@+id/textView_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/welcome"
+            android:textSize="@dimen/welcome"
+            android:text="Welcome"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:src="@drawable/guest_img_funservice"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/abc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_marginTopPercent="35%"
+        app:layout_heightPercent="59%">
+
+        <com.example.f1285.hoteltest.TextViewRobotoRegular
+            android:id="@+id/textView_beta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textColor="@color/beta"
+            android:textSize="@dimen/beta"
+            android:text="Beta"/>
+
+    </RelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>

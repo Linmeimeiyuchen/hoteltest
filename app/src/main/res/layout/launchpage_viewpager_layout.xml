@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/ralatiovelayout_viewpager"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guest_img_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="126dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/guest_ic_launch_1"/>
+
+        <com.example.f1285.hoteltest.TextViewRobotoMedium
+            android:id="@+id/textView_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:textSize="@dimen/viewpagerText"
+            android:textColor="@color/viewpagerText"/>
+            <!--android:text="Customizing your best stay of travel,\nincredible experience of hotel."-->
+
+    </LinearLayout>
+
+</RelativeLayout>

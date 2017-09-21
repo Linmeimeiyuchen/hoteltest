@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbarTitle">22sp</dimen>
+    <dimen name="welcome">21sp</dimen>
+    <dimen name="beta">16sp</dimen>
+    <dimen name="viewpagerText">14sp</dimen>
+    <dimen name="button_login_register_submit">18sp</dimen>
+    <dimen name="textview_error">18sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="textView_scanner_bottom">18sp</dimen>
+    <dimen name="textView_scanner_error">18sp</dimen>
+</resources>
