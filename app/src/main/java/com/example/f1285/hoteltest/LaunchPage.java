@@ -147,6 +147,15 @@ public class LaunchPage extends AppCompatActivity {
             }
         });
 
+        buttonRegister.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent();
+                intent.setClass(LaunchPage.this, Register.class);
+                startActivity(intent);
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.viewpager_launchpage);
         viewpagerAdapter = new ViewpagerAdapter(this, stringsViewpager);
         viewPager.setAdapter(viewpagerAdapter);

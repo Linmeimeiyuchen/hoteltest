@@ -9,4 +9,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="textView_scanner_bottom">18sp</dimen>
     <dimen name="textView_scanner_error">18sp</dimen>
+    <dimen name="button_toptext_fb_google">12sp</dimen>
+    <dimen name="button_bottomtext_fb_google">14sp</dimen>
+    <dimen name="textView_orwithEmail">14sp</dimen>
+    <dimen name="textView_login_title">14sp</dimen>
+    <dimen name="editText_login_register_hint">14sp</dimen>
+    <dimen name="textView_login_forget_pw">14sp</dimen>
 </resources>

@@ -3,4 +3,10 @@
     <string name="title_activity_register">Register</string>
     <string name="textView_scanner_bottom">Point Camera at a QR Code</string>
     <string name="textView_scanner_error">AuthCode error! Please check and try again, or you can use QR code.</string>
+    <string name="textView_login_forget_pw">Forget password?</string>
+    <string name="editText_hint_email">Enter your email address</string>
+    <string name="editText_hint_password">Set a password (6+ characters)</string>
+    <string name="editText_hint_username">Choose your username</string>
+    <string name="editText_hint_birthdate">MM / DD</string>
+    <string name="editText_hint_gender">Male / Female</string>
 </resources>

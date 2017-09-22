@@ -18,4 +18,11 @@
     <color name="textView_scanner_bottom">#FFFFFF</color>
     <color name="line_viewfinderView">#7BB93F</color>
     <color name="textView_scanner_error">#FF0000</color>
+    <color name="button_text_fb_google">#FFFFFF</color>
+    <color name="line_login">#59FFFFFF</color>
+    <color name="textView_orwithEmail">#BFFFFFFF</color>
+    <color name="textView_login_title">#BFFFFFFF</color>
+    <color name="textView_login_forget_pw">#FFFFFF</color>
+    <color name="editText_login_register_hint">#80FFFFFF</color>
+    <color name="editText_login_register_input">#BFFFFFFF</color>
 </resources>

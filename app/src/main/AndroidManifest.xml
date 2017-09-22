@@ -20,10 +20,7 @@
         </activity>
         <activity android:name=".LaunchPage" />
         <activity android:name=".Login" />
-        <activity
-            android:name=".Register"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme" />
+        <activity android:name=".Register"/>
         <!--
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
