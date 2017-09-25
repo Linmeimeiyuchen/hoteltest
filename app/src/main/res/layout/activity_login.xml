@@ -34,7 +34,7 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:id="@+id/button_lgoin_fb"
+            android:id="@+id/button_login_fb"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginRight="6dp"
@@ -235,6 +235,5 @@
         android:textColor="@color/textView_login_forget_pw"
         android:textSize="@dimen/textView_login_forget_pw"
         android:text="@string/textView_login_forget_pw"/>
-
 
 </RelativeLayout>

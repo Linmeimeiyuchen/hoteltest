@@ -25,4 +25,5 @@
     <color name="textView_login_forget_pw">#FFFFFF</color>
     <color name="editText_login_register_hint">#80FFFFFF</color>
     <color name="editText_login_register_input">#BFFFFFFF</color>
+    <color name="textView_home_userName">#666666</color>
 </resources>

@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import com.facebook.FacebookSdk;
 
 public class Register extends AppCompatActivity {
 
@@ -89,8 +90,6 @@ public class Register extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     // check email 是否已經有人使用過
@@ -102,7 +101,7 @@ public class Register extends AppCompatActivity {
                 emailAvailable = false;
             }
         }
-        if( emailAvailable == true )
+        if( emailAvailable == true && !editTextEmail.getText().toString().trim().equals("") )
             imageViewEmailAvailable.setVisibility(View.VISIBLE);
 
         return  emailAvailable;
