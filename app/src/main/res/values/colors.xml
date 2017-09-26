@@ -26,4 +26,10 @@
     <color name="editText_login_register_hint">#80FFFFFF</color>
     <color name="editText_login_register_input">#BFFFFFFF</color>
     <color name="textView_home_userName">#666666</color>
+    <color name="bottomNavigationBarInAction">#66333333</color>
+    <color name="bottomNavigationBarAction">#333333</color>
+    <color name="gradientStart">#FF000000</color>
+    <color name="gradientEnd">#00000000</color>
+    <color name="textView_cardView">#FFFFFF</color>
+    <color name="imageButton_cardView">#00000000</color>
 </resources>

@@ -16,4 +16,5 @@
     <dimen name="editText_login_register_hint">14sp</dimen>
     <dimen name="textView_login_forget_pw">14sp</dimen>
     <dimen name="textView_home_userName">18sp</dimen>
+    <dimen name="textView_cardView">18sp</dimen>
 </resources>

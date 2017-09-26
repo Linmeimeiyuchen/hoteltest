@@ -10,4 +10,5 @@
     <string name="editText_hint_username">Choose your username</string>
     <string name="editText_hint_birthdate">MM / DD</string>
     <string name="editText_hint_gender">Male / Female</string>
+    <string name="textView_cardView">Greece Aegean Sea Romantic...</string>
 </resources>

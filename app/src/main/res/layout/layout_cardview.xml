@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="147dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_ad1">
+
+        <!-- 陰影 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/gradient_cardview">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_cardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/imageButton_cardView_next"
+                    android:textColor="@color/textView_cardView"
+                    android:textSize="@dimen/textView_cardView"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/textView_cardView" />
+
+                <ImageButton
+                    android:id="@+id/imageButton_cardView_next"
+                    android:layout_width="47dp"
+                    android:layout_height="47dp"
+                    android:scaleType="fitCenter"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/imageButton_cardView"
+                    android:src="@drawable/guest_btn_next" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

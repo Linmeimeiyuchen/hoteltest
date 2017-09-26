@@ -1,13 +1,9 @@
 package com.example.f1285.hoteltest;
 
 import android.graphics.Typeface;
-import android.support.constraint.solver.SolverVariable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentContainer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Window;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {

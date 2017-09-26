@@ -19,13 +19,14 @@
             android:layout_height="match_parent"
             android:src="@drawable/guest_ic_launch_1"/>
 
-        <com.example.f1285.hoteltest.TextViewRobotoMedium
+        <TextView
             android:id="@+id/textView_viewpager"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="12dp"
-            android:textSize="@dimen/viewpagerText"
-            android:textColor="@color/viewpagerText"/>
+            android:fontFamily="sans-serif"
+            android:textColor="@color/viewpagerText"
+            android:textSize="@dimen/viewpagerText" />
             <!--android:text="Customizing your best stay of travel,\nincredible experience of hotel."-->
 
     </LinearLayout>
