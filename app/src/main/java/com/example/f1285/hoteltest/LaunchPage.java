@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.hardware.display.DisplayManager;
+import android.icu.text.LocaleDisplayNames;
 import android.support.design.widget.TabLayout;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.content.ContextCompat;
@@ -82,10 +83,6 @@ public class LaunchPage extends AppCompatActivity {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(LaunchPage.this);
                 intentIntegrator.setCaptureActivity(CustomCaptureActivity.class);
                 intentIntegrator.initiateScan();
-                /*
-                intent = new Intent();
-                intent.setClass(LaunchPage.this, QrcodeScan.class);
-                startActivity(intent);*/
             }
         });
 
@@ -97,7 +94,7 @@ public class LaunchPage extends AppCompatActivity {
         childOfPercentRelativeLayout = percentRelativeLayout.getChildAt(0);
         // Get previous height
         usableHeightPrevious = getUsableHeight();
-        //Log.d(TAG, "usableHeightPrevious = " + usableHeightPrevious);
+        Log.d(TAG, "usableHeightPrevious = " + usableHeightPrevious);
 
         // Listener when view change
         childOfPercentRelativeLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -169,18 +166,33 @@ public class LaunchPage extends AppCompatActivity {
     // resultCode, data 皆由 subActivity 的 setResult(int resultCode, Intent data) 回傳
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
         // 获取解析结果
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                //Toast.makeText(this, "取消扫描", Toast.LENGTH_LONG).show();
-            } else {
-                //Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
-                editTextAuthcode.setText( result.getContents() );
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "Enter Result!");
+        Log.d(TAG, "Result = "+resultCode);
+        switch (resultCode){
+
+            case RESULT_OK:
+                IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                if (result != null) {
+                    if (result.getContents() == null) {
+                        //Toast.makeText(this, "取消扫描", Toast.LENGTH_LONG).show();
+                    } else {
+                        //Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
+                        editTextAuthcode.setText( result.getContents() );
+                    }
+                } else {
+                    super.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
+            case 1:
+                Bundle bundle = data.getExtras();
+                String qrcode = bundle.getString("qrcode");
+                editTextAuthcode.setText( qrcode );
+                break;
+
         }
+
     }
 
     // Get keyboard 彈起後剩多少螢幕可以使用, 單位為 px
@@ -197,9 +209,9 @@ public class LaunchPage extends AppCompatActivity {
     // 確認 keyboard 是否彈起
     private boolean checkKeyboardJump(){
         int usableHeightNow = getUsableHeight();
-        Log.d(TAG, "Previous = "+ usableHeightPrevious);
-        Log.d(TAG, "Now = "+ usableHeightNow);
-        Log.d(TAG, "Height = "+ percentRelativeLayout.getHeight());
+        //Log.d(TAG, "Previous = "+ usableHeightPrevious);
+        //Log.d(TAG, "Now = "+ usableHeightNow);
+        //Log.d(TAG, "Height = "+ percentRelativeLayout.getHeight());
         if( usableHeightNow != usableHeightPrevious ){
             if( (percentRelativeLayout.getHeight()-usableHeightNow) > (percentRelativeLayout.getHeight()/4) ){
                 usableHeightPrevious = usableHeightNow;

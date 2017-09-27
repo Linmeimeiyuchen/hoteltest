@@ -68,8 +68,8 @@ public class Home extends AppCompatActivity {
                 .setBorderWidth(2)
                 .setBorderColor(R.color.badgeItem)
                 .setText("5")
-                .setAnimationDuration(2000)
-                .setHideOnSelect(true);
+                .setAnimationDuration(1000)     // 消失動畫速度
+                .setHideOnSelect(true);         // 點擊是否消失
 
         // BottomNavigationItem 表示被選中時的圖示，setInactiveIconResource 表示未被選中時的圖示
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.guest_ic_home_focus, "HOME").setInactiveIconResource(R.drawable.guest_ic_home))

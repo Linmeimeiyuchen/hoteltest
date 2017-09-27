@@ -16,16 +16,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.zxing.BinaryBitmap;
+import com.google.zxing.DecodeHintType;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Reader;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 import java.io.FileNotFoundException;
+import java.util.Hashtable;
 
 public class CustomCaptureActivity extends AppCompatActivity {
 
@@ -34,6 +37,7 @@ public class CustomCaptureActivity extends AppCompatActivity {
     private Toolbar toolbarScan;
     private Intent intent;
     private TextView textViewError;
+
 
     // 條碼掃描管理器
     private CaptureManager captureManager;
@@ -46,6 +50,8 @@ public class CustomCaptureActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_custom_capture);
         decoratedBarcodeView = (DecoratedBarcodeView) findViewById(com.google.zxing.client.android.R.id.zxing_barcode_scanner);
+
+        Log.d("123", "enter");
 
         captureManager = new CaptureManager(this, decoratedBarcodeView);
         captureManager.initializeFromIntent(getIntent(), savedInstanceState);
@@ -74,6 +80,7 @@ public class CustomCaptureActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_toolbar_loadingImage:
+                        Log.d(TAG, "enter");
                         intent = new Intent();
                         // set file type 檔案型態，此設定所有影像檔
                         intent.setType("image/*");
@@ -92,30 +99,38 @@ public class CustomCaptureActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Uri uriPhoto = null;
+        Log.d(TAG, "Enter");
         if( data != null ){
 
             switch (requestCode){
                 case PHOTO:
                     // get photo uri
                     uriPhoto = data.getData();
+                    Log.d(TAG, "uriPhoto = "+uriPhoto);
 
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uriPhoto);
 
+                        // 此為 Bitmap to Text for Zxing 固定寫法
+                        Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();
+                        hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
                         int pixels[] = new int[bitmap.getWidth()*bitmap.getHeight()];
-
-                        LuminanceSource source = new RGBLuminanceSource(bitmap.getWidth(), bitmap.getHeight(), pixels);
+                        bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+                        RGBLuminanceSource source = new RGBLuminanceSource(bitmap.getWidth(), bitmap.getHeight(), pixels);
                         BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
-                        Reader reader = new MultiFormatReader();
-                        Result result = null;
-                        result = reader.decode(binaryBitmap);
+                        QRCodeReader qrCodeReader = new QRCodeReader();
+                        Result result = qrCodeReader.decode(binaryBitmap, hints);      // 結果值
 
+                        // 利用 setResult 回傳 qrcode 給 LaunchPage.java
                         intent = new Intent();
                         intent.setClass(CustomCaptureActivity.this, LaunchPage.class);
-                        intent.putExtra("qrcode", result.getText());
-                        this.setResult(Activity.RESULT_OK, intent);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("qrcode", result.getText());
+                        intent.putExtras(bundle);
+                        setResult(1, intent);   // result = 1 代表是利用 photo 掃描
                         finish();
                     } catch (Exception e){
+                        // 如果 photo 無法辨識則顯示 error
                         textViewError.setVisibility(View.VISIBLE);
                     }
                     break;
