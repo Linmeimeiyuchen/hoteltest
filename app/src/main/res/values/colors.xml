@@ -32,4 +32,5 @@
     <color name="gradientEnd">#00000000</color>
     <color name="textView_cardView">#FFFFFF</color>
     <color name="imageButton_cardView">#00000000</color>
+    <color name="badgeItem">#E44044</color>
 </resources>
