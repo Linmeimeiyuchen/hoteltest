@@ -7,65 +7,63 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_home"
+        android:id="@+id/toolbar_booking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/toolbar">
 
         <TextView
-            android:id="@+id/toolbar_home_title"
+            android:id="@+id/toolbar_booking_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/toolbarTitle"
             android:textSize="@dimen/toolbarTitle"
-            android:text="Home"/>
+            android:text="My Booking"/>
 
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearLayout_home_1"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@+id/toolbar_home"
-        android:weightSum="1">
+        android:layout_below="@+id/toolbar_booking"
+        android:weightSum="3">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView_home_userPhoto"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/guest_img_profile" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/line_myBooking"/>
 
         <TextView
-            android:id="@+id/textView_home_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
             android:textColor="@color/textView_home_userName"
             android:textSize="@dimen/textView_home_userName"
             android:fontFamily="sans-serif"
-            android:text="test"/>
+            android:text="Hotel"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/line_myBooking"/>
 
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleView_home"
+        android:id="@+id/recycleView_booking"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/linearLayout_home_1"
-        android:layout_above="@+id/bottom_navigation_home">
+        android:layout_below="@+id/linearLayout_home_1">
     </android.support.v7.widget.RecyclerView>
-
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/bottom_navigation_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
 
 </RelativeLayout>

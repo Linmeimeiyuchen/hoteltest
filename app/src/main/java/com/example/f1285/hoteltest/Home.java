@@ -1,8 +1,11 @@
 package com.example.f1285.hoteltest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,46 +19,30 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.squareup.picasso.Picasso;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener{
 
     private static final String TAG = "homeActivity";
-    private TextView textViewUserName;
-    private ImageView imageViewUserPhoto;
-    private Toolbar toolbar_home;
+    private HomeFragment homeFragment;
+    private BookingFragment bookingFragment;
     private BottomNavigationBar bottomNavigationBar;
     private Bundle bundle;
+    private Intent intent;
     private String userName, photoUrl;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private String[] myDataset_text = {"Greece Aegean Sea Romantic1...", "Greece Aegean Sea Romantic2...", "Greece Aegean Sea Romantic3..."
-            , "Greece Aegean Sea Romantic4..."};
-    private int[] myDataset_img = {R.drawable.img_ad1, R.drawable.img_ad2, R.drawable.img_ad2, R.drawable.img_ad1};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        //setContentView(R.layout.activity_home);
+        setContentView(R.layout.home);
 
+        // 取得 Facebook
         bundle  = this.getIntent().getExtras();
         userName = bundle.getString("name");
         photoUrl = bundle.getString("photo");
         //Log.d(TAG, bundle.getString("photo"));
 
-        imageViewUserPhoto = (ImageView) findViewById(R.id.imageView_home_userPhoto);
-        toolbar_home = (Toolbar) findViewById(R.id.toolbar_home);
+        //toolbar_home = (Toolbar) findViewById(R.id.toolbar_home);
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_home);
-
-        if( userName != null ){
-            textViewUserName = (TextView) findViewById(R.id.textView_home_userName);
-            textViewUserName.setText(userName);
-        }
-        if( photoUrl != null ) {
-            Picasso.with(getApplicationContext()).load(photoUrl).into(imageViewUserPhoto);
-        }
-
-        /*---- Toolbar ----*/
-        toolbar_home.inflateMenu(R.menu.menu_toolbar_home);
 
         /*---- BottomNavigationBar ----*/
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
@@ -76,19 +63,65 @@ public class Home extends AppCompatActivity {
                 .addItem(new BottomNavigationItem(R.drawable.guest_ic_booking_focus, "My Booking").setInactiveIconResource(R.drawable.guest_ic_booking))
                 .addItem(new BottomNavigationItem(R.drawable.guest_ic_coupon_focus, "Coupon").setInactiveIconResource(R.drawable.guest_ic_coupon))
                 .addItem(new BottomNavigationItem(R.drawable.guest_ic_messenger_focus, "Messenger").setInactiveIconResource(R.drawable.guest_ic_messenger).setBadgeItem(textBadgeItem))
+                .setFirstSelectedPosition(0)
                 .initialise();
+        // Set BottomNavigationBar Listener
+        bottomNavigationBar.setTabSelectedListener(this);
+        // 設定 Fragment 初始值
+        setDefaultFragment();
 
-        /*---- RecycleView ----*/
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_home);
-        // 設定 setHasFixedSize(true)在 item 高度固定時，，不用每次加一個 item 就算一次高可增加效率
-        mRecyclerView.setHasFixedSize(true);
-        // 設定使用哪種 layoutManager，recyclerView 共有三種 layoutManager 可以使用
-        // LinearLayoutManager, GridLayoutManager, StaggeredGridLayoutManager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        //設定 RecyclerAdapter
-        mAdapter = new RecyclerAdapter(myDataset_text, myDataset_img);
-        mRecyclerView.setAdapter(mAdapter);
+    }
 
+    // 設定預設選項和 fragment
+    private void setDefaultFragment(){
+        // FragmentManager 用來管理 Fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        // FragmentTransaction 用來對 Fragment 做處理，add/remove/detach/attach/replace/addToBackStack...
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // HomeFragment 需要 userName and userPhoto 因此需要傳給他
+        bundle = new Bundle();
+        bundle.putString("userName", userName);
+        bundle.putString("photoUrl", photoUrl);
+        homeFragment = new HomeFragment();
+        homeFragment.setArguments(bundle);
+        fragmentTransaction.add(R.id.linearLayout_home, homeFragment);
+        fragmentTransaction.commit();
+    }
+
+    // BottomNavigationBar Listener
+    // onTabSelected 未被選中 → 被選中
+    @Override
+    public void onTabSelected(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        switch (position){
+            case 0:
+                Log.d(TAG, "0");
+                if(homeFragment == null){
+                    bookingFragment = new BookingFragment();
+                    fragmentTransaction.add(R.id.linearLayout_home, homeFragment);
+                }
+                fragmentTransaction.replace(R.id.linearLayout_home, homeFragment);
+                break;
+            case 1:
+                Log.d(TAG, "1");
+                if(bookingFragment == null){
+                    bookingFragment = new BookingFragment();
+                    fragmentTransaction.add(R.id.linearLayout_home, bookingFragment);
+                }
+                fragmentTransaction.replace(R.id.linearLayout_home, bookingFragment);
+                break;
+        }
+        fragmentTransaction.commit();
+    }
+
+    // 被選中 → 未被選中
+    @Override
+    public void onTabUnselected(int position) {
+    }
+
+    // 被選中 → 被選中
+    @Override
+    public void onTabReselected(int position) {
     }
 }

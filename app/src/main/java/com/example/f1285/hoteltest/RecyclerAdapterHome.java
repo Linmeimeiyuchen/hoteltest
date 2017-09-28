@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapterHome extends RecyclerView.Adapter<RecyclerAdapterHome.ViewHolder> {
 
     private String[] myDataset_text;
     private int[] myDataset_img;
@@ -23,16 +23,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     // 設定預設值
-    public RecyclerAdapter (String[] myDataset_text, int[] myDataset_img){
+    public RecyclerAdapterHome (String[] myDataset_text, int[] myDataset_img){
         this.myDataset_text = myDataset_text;
         this.myDataset_img = myDataset_img;
     }
 
     // 現有 ViewHolder 不夠用，產生新的 ViewHolder
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerAdapterHome.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_cardview, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_cardview_home, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
