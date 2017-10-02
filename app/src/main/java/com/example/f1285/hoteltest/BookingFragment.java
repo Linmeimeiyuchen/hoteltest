@@ -1,24 +1,39 @@
 package com.example.f1285.hoteltest;
 
+import android.graphics.Canvas;
+import android.icu.text.LocaleDisplayNames;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-public class BookingFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    private Toolbar toolbar_booking;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private String[] setDataTitle1 = {"FunHotel", "Sulatania Hotel", "FunHotel", "Sulatania Hotel"};
-    private String[] setDataTitle2 = {"25 NOV WED - 28 NOV SAT", "28 NOV WED - 30 NOV SAT", "25 NOV WED - 28 NOV SAT", "28 NOV WED - 30 NOV SAT"};
-    private int[] setDataImg = {R.drawable.img_my_booking1, R.drawable.img_my_booking2, R.drawable.img_my_booking1, R.drawable.img_my_booking2};
+public class BookingFragment extends Fragment{
+
+    private final static String TAG = "BookingFragment";
+    private Toolbar toolbar_booking = null;
+    private RecyclerView mRecyclerView = null;
+    private RecyclerAdapterBooking recyclerAdapterBooking = null;
+    private RecyclerView.LayoutManager mLayoutManager = null;
+    private ItemTouchHelperCallback itemTouchHelperCallback = null;
+    private SwipeButtonAction swipeButtonAction = null;
+    private List setDataTitle1 = new ArrayList(Arrays.asList("FunHotel", "Sulatania Hotel", "FunHotel", "Sulatania Hotel"));
+    private List setDataTitle2 = new ArrayList(Arrays.asList("25 NOV WED - 28 NOV SAT", "28 NOV WED - 30 NOV SAT", "25 NOV WED - 28 NOV SAT", "28 NOV WED - 30 NOV SAT"));
+    private List setDataImg = new ArrayList(Arrays.asList(R.drawable.img_my_booking1, R.drawable.img_my_booking2, R.drawable.img_my_booking1, R.drawable.img_my_booking2));
+    private boolean scrollState = false;
 
     @Nullable
     @Override
@@ -29,7 +44,18 @@ public class BookingFragment extends Fragment {
         toolbar_booking = (Toolbar) view.findViewById(R.id.toolbar_booking);
         toolbar_booking.inflateMenu(R.menu.menu_toolbar_booking);
 
-        /*---- RecycleView ----*/
+        setupRecyclerView(view);
+
+        return view;
+    }
+
+    /*---------------------*/
+    /*---- RecycleView ----*/
+    /*---------------------*/
+    // Before Declare: RecyclerView.LayoutManager mLayoutManager, RecyclerView mRecyclerView, RecyclerAdapterBooking recyclerAdapterBooking
+    // SwipeButtonAction swipeButtonAction, ItemTouchHelperCallback itemTouchHelperCallback
+    private void setupRecyclerView( View view){
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycleView_booking);
         // 設定 setHasFixedSize(true)在 item 高度固定時，，不用每次加一個 item 就算一次高可增加效率
         mRecyclerView.setHasFixedSize(true);
@@ -37,10 +63,58 @@ public class BookingFragment extends Fragment {
         // LinearLayoutManager, GridLayoutManager, StaggeredGridLayoutManager
         mLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        //設定 RecyclerAdapter
-        mAdapter = new RecyclerAdapterBooking(setDataTitle1, setDataTitle1, setDataImg);
-        mRecyclerView.setAdapter(mAdapter);
+        //設定 RecyclerAdapter，RecyclerAdapterBooking 需要傳三個參數
+        recyclerAdapterBooking = new RecyclerAdapterBooking(setDataTitle1, setDataTitle2, setDataImg);
+        mRecyclerView.setAdapter(recyclerAdapterBooking);
 
-        return view;
+        // Set Delete Button，如果確認按下後，會呼叫 onRightClicked()
+        swipeButtonAction = new SwipeButtonAction() {
+            @Override
+            public void onRightClicked(int position) {
+                Log.d(TAG, "Button on Click!!");
+                recyclerAdapterBooking.onItemRemove(position);
+            }
+        };
+
+
+        // 傳 swipeButtonAction 以監聽按鈕
+        itemTouchHelperCallback = new ItemTouchHelperCallback(swipeButtonAction, getContext());
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+        // Draw Delete Button
+        mRecyclerView.addItemDecoration( new RecyclerView.ItemDecoration(){
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                //Log.d(TAG, "onDraw enter!!");
+                itemTouchHelperCallback.onDraw(c);
+            }
+        });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                Log.d(TAG, "onScrollStateChanged");
+                scrollState = true;
+
+                /*
+                for(int i = 0; i < recyclerAdapterBooking.getItemCount(); i++){
+                    Log.d(TAG, "i = "+i);
+                    View view1 = mRecyclerView.getChildAt(i);
+                    RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)mRecyclerView.getChildViewHolder(view1);
+                    ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.delete_button);
+                    imageView.setVisibility(View.VISIBLE);
+                }*/
+                /*
+                View view1 = mRecyclerView.getChildAt(3);
+                RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)mRecyclerView.getChildViewHolder(view1);
+                ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.delete_button);
+                imageView.setVisibility(View.VISIBLE);*/
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+
+
     }
+
 }

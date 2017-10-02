@@ -141,6 +141,7 @@ public class LaunchPage extends AppCompatActivity {
                 intent = new Intent();
                 intent.setClass(LaunchPage.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
 

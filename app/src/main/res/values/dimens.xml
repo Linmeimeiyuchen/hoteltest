@@ -20,4 +20,5 @@
     <dimen name="textView_cardView_booking1">22sp</dimen>
     <dimen name="textView_cardView_booking2">14sp</dimen>
     <dimen name="textView_cardView_bookingButtom">18sp</dimen>
+    <dimen name="button_cardview_delete">40dp</dimen>
 </resources>

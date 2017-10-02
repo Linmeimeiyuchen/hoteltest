@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -30,9 +34,11 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String[] myDataset_text = {"Greece Aegean Sea Romantic1...", "Greece Aegean Sea Romantic2...", "Greece Aegean Sea Romantic3..."
-            , "Greece Aegean Sea Romantic4..."};
-    private int[] myDataset_img = {R.drawable.img_ad1, R.drawable.img_ad2, R.drawable.img_ad2, R.drawable.img_ad1};
+    //private String[] myDataset_text = {"Greece Aegean Sea Romantic1...", "Greece Aegean Sea Romantic2...", "Greece Aegean Sea Romantic3..."
+    //        , "Greece Aegean Sea Romantic4..."};
+    //private int[] myDataset_img = {R.drawable.img_ad1, R.drawable.img_ad2, R.drawable.img_ad2, R.drawable.img_ad1};
+    private List myDataset_text = new ArrayList(Arrays.asList("Greece Aegean Sea Romantic1...", "Greece Aegean Sea Romantic2...", "Greece Aegean Sea Romantic3...", "Greece Aegean Sea Romantic4..."));
+    private List myDataset_img = new ArrayList(Arrays.asList(R.drawable.img_ad1, R.drawable.img_ad2, R.drawable.img_ad2, R.drawable.img_ad1));
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

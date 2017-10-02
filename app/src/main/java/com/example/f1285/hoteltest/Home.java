@@ -28,6 +28,8 @@ public class Home extends AppCompatActivity implements BottomNavigationBar.OnTab
     private Bundle bundle;
     private Intent intent;
     private String userName, photoUrl;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +77,9 @@ public class Home extends AppCompatActivity implements BottomNavigationBar.OnTab
     // 設定預設選項和 fragment
     private void setDefaultFragment(){
         // FragmentManager 用來管理 Fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         // FragmentTransaction 用來對 Fragment 做處理，add/remove/detach/attach/replace/addToBackStack...
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction = fragmentManager.beginTransaction();
         // HomeFragment 需要 userName and userPhoto 因此需要傳給他
         bundle = new Bundle();
         bundle.putString("userName", userName);
@@ -88,12 +90,24 @@ public class Home extends AppCompatActivity implements BottomNavigationBar.OnTab
         fragmentTransaction.commit();
     }
 
+    private void setFragmentHint(){
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        if(homeFragment != null){
+            fragmentTransaction.hide(homeFragment);
+        }
+        if(bookingFragment != null){
+            fragmentTransaction.hide(bookingFragment);
+        }
+    }
+
     // BottomNavigationBar Listener
     // onTabSelected 未被選中 → 被選中
     @Override
     public void onTabSelected(int position) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        setFragmentHint();
         switch (position){
             case 0:
                 Log.d(TAG, "0");
@@ -101,7 +115,8 @@ public class Home extends AppCompatActivity implements BottomNavigationBar.OnTab
                     bookingFragment = new BookingFragment();
                     fragmentTransaction.add(R.id.linearLayout_home, homeFragment);
                 }
-                fragmentTransaction.replace(R.id.linearLayout_home, homeFragment);
+                //fragmentTransaction.replace(R.id.linearLayout_home, homeFragment);
+                fragmentTransaction.show(homeFragment);
                 break;
             case 1:
                 Log.d(TAG, "1");
@@ -109,7 +124,8 @@ public class Home extends AppCompatActivity implements BottomNavigationBar.OnTab
                     bookingFragment = new BookingFragment();
                     fragmentTransaction.add(R.id.linearLayout_home, bookingFragment);
                 }
-                fragmentTransaction.replace(R.id.linearLayout_home, bookingFragment);
+                //fragmentTransaction.replace(R.id.linearLayout_home, bookingFragment);
+                fragmentTransaction.show(bookingFragment);
                 break;
         }
         fragmentTransaction.commit();

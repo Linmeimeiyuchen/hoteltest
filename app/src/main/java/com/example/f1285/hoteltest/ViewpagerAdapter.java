@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by f1285 on 2017/9/15.
- */
 
 public class ViewpagerAdapter extends PagerAdapter{
 

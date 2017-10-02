@@ -3,6 +3,9 @@ package com.example.f1285.hoteltest;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -13,6 +16,7 @@ import com.journeyapps.barcodescanner.ViewfinderView;
  * Created by f1285 on 2017/9/20.
  */
 
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class CustomViewfinderView extends ViewfinderView {
 
     private static final String TAG = "CustomViewfinderView";
@@ -21,7 +25,8 @@ public class CustomViewfinderView extends ViewfinderView {
     // TypedValue.applyDimension(int unit, float value, DisplayMetrics metrics) 用來轉換 px/dp/sp
     private float mLineDepth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
     // 邊角線顏色
-    private int mLineColor = getResources().getColor(R.color.line_viewfinderView, null);
+    //private int mLineColor = getResources().getColor(R.color.line_viewfinderView, null);
+    private int mLineColor = ContextCompat.getColor(getContext(),R.color.line_viewfinderView);
     // 邊角線長度
     private float mLineRate = 0.1f;
 
