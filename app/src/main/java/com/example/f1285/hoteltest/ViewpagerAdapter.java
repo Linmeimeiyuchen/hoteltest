@@ -1,7 +1,10 @@
 package com.example.f1285.hoteltest;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -13,7 +16,7 @@ import android.widget.TextView;
 
 public class ViewpagerAdapter extends PagerAdapter{
 
-    private int [] background_resource = {R.drawable.guest_bg_loading, R.drawable.guest_img_bg};
+    private int [] background_resource = {R.mipmap.guest_bg_loading, R.mipmap.guest_img_bg};
     private String [] strings;
     private Context context;
     private LayoutInflater layoutInflater;

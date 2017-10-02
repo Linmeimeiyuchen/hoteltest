@@ -4,8 +4,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -83,8 +85,15 @@ public class RecyclerAdapterBooking extends RecyclerView.Adapter<RecyclerAdapter
     public void onBindViewHolder(RecyclerAdapterBooking.ViewHolder holder, int position) {
         holder.textViewCardViewBookingTitle1.setText(setDataTitle1.get(position).toString());
         holder.textViewCardViewBookingTitle2.setText(setDataTitle2.get(position).toString());
-        //holder.relativeLayoutCardViewBooking.setBackground(ContextCompat.getDrawable(viewGroup.getContext(), R.drawable.img_my_booking2));
         holder.relativeLayoutCardViewBooking.setBackgroundResource((int)setDataImg.get(position));
+
+        holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d(TAG, "on touch ");
+                return false;
+            }
+        });
     }
 
     // Adapter 才知道有多少資料

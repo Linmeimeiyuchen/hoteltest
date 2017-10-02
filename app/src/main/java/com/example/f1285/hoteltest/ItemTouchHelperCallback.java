@@ -240,4 +240,5 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback{
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 
+
 }

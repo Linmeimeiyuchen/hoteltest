@@ -76,7 +76,6 @@ public class BookingFragment extends Fragment{
             }
         };
 
-
         // 傳 swipeButtonAction 以監聽按鈕
         itemTouchHelperCallback = new ItemTouchHelperCallback(swipeButtonAction, getContext());
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
@@ -91,26 +90,34 @@ public class BookingFragment extends Fragment{
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                Log.d(TAG, "onScrollStateChanged");
-                scrollState = true;
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent event) {
+                if( event.getAction() == MotionEvent.ACTION_UP ){
+                    Log.d(TAG, "onInterceptTouchEvent");
+                    try{
+                        for(int i = 0; i < recyclerAdapterBooking.getItemCount(); i++) {
+                            View view1 = mRecyclerView.getChildAt(i);
+                            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) mRecyclerView.getChildViewHolder(view1);
+                            ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.delete_button);
+                            imageView.setVisibility(View.VISIBLE);
+                        }
+                    }catch (Exception e){
+                        Log.d(TAG, "Error");
+                    }
+                }
 
-                /*
-                for(int i = 0; i < recyclerAdapterBooking.getItemCount(); i++){
-                    Log.d(TAG, "i = "+i);
-                    View view1 = mRecyclerView.getChildAt(i);
-                    RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)mRecyclerView.getChildViewHolder(view1);
-                    ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.delete_button);
-                    imageView.setVisibility(View.VISIBLE);
-                }*/
-                /*
-                View view1 = mRecyclerView.getChildAt(3);
-                RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder)mRecyclerView.getChildViewHolder(view1);
-                ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.delete_button);
-                imageView.setVisibility(View.VISIBLE);*/
-                super.onScrollStateChanged(recyclerView, newState);
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                Log.d(TAG, "onTouchEvent");
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                Log.d(TAG, "onRequestDisallowInterceptTouchEvent");
             }
         });
 
